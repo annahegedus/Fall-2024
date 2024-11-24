@@ -67,7 +67,7 @@ Before opening the bar, you need to find a reliable supplier that has all the in
 ingredients_list <- cocktail_data_formatted %>% 
   separate_rows(ingredients, sep = " ") %>%   #all ingredeints into a new row
   distinct(ingredients) %>%       #list every item once
-  arrange(ingredients)            #arrange to alphabetical order
+  #arrange(ingredients)            #arrange to alphabetical order
   
 
 ingredients_list
