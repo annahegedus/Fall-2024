@@ -128,11 +128,12 @@ Notes:
 ```{r}
 library(ggplot2)
 library(scales)
-
+library(readr)
+library(dplyr)
 
 
 #tuesdata3 <- tidytuesdayR::tt_load('2019-11-05') 
-data3 <- read_csv("C:/Users/Hegedüs Anna/Documents/Fall-2024/data/commute.csv")  # note : state name abbreviations not provided
+data3 <- read_csv("C:/Users/Hegedüs Anna/Documents/Fall-2024/data/commute.csv")  #note: state name abbreviations not provided
 
 #states names provided in built in R
 state_table <- data.frame(
@@ -142,23 +143,26 @@ state_table <- data.frame(
 
 
 commute_groupping <- data3 %>%
-  group_by(state, mode, state_region) %>% # Group by broad field and year
-  summarize(number_of_commuters = sum(n, na.rm = TRUE), .groups = "drop") # Count 
+  group_by(state, mode, state_region) %>% #group by broad field and year
+  summarize(number_of_commuters = sum(n, na.rm = TRUE), .groups = "drop") #count 
 
 #make a scatter plot, so a merging is needed
-d3_1 = commute_groupping[commute_groupping$mode == 'Bike' ,] 
-d3_2 = commute_groupping[commute_groupping$mode == 'Walk' ,]
+d3_bike = commute_groupping %>% 
+  filter(mode == 'Bike')
+d3_walk = commute_groupping %>% 
+  filter(mode == 'Walk')
 
 
 #Note : Because the abbreviations are not provided DC is lost....
 #Note2 : Because the criteria of the plotted text abbs not given, using the built on check overlap argument, but the results are not same. What is the criteria??
 
 
-merged = merge(d3_1, d3_2, by = c('state', 'state_region'))
+merged = merge(d3_bike, d3_walk, by = c('state', 'state_region'))
 
 #with these steps the capital can be saved
-DC = merged[merged$state == 'District of Columbia', ]
-DC$state_abb = 'DC'
+DC <- merged %>%
+  filter(state == 'District of Columbia') %>%
+  mutate(state_abb = 'DC')
 merged = merge(merged, state_table, by = c('state'))
 merged = rbind(merged, DC)
 
@@ -170,24 +174,18 @@ merged$walk_log = (merged$number_of_commuters.y)
 merged$bike_log = (merged$number_of_commuters.x)
 
 
-
-
-
-
 ggplot(merged, aes(x = walk_log, y = bike_log, color = state_region)) +
-  geom_point(size = 2) +  # Set point size
-  scale_x_log10(labels = comma_format()) +  # Log scale for x-axis with comma format
-  scale_y_log10(labels = comma_format()) + # Log scale for y-axis with comma format
+  geom_point(size = 2) +  #set point size
+  scale_x_log10(labels = comma_format()) +  #log scale for x-axis with comma format
+  scale_y_log10(labels = comma_format()) + #log scale for y-axis with comma format
   geom_text(aes(label = state_abb), color = "black", size = 5, check_overlap = TRUE) +
-  theme_light() +  # Use light theme
+  theme_light() +  #use light theme
   labs(
     x = "Number of ppl walking to work (log N)", 
     y = "Number of ppl biking to work (log N)", 
     title = "Title number of people walking vs biking to work in each USA state",  #note, the Title part could be a typo here
     color = "State region"
   )
-
-
 
 
 
