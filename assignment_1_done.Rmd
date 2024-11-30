@@ -201,7 +201,7 @@ print(without_rare_cocktails)
 
 ## 10. Create a cheat sheet for the bartender!
 
-Create a matrix that shows all cocktail names as rows and all ingredients as columns. When a cocktail requires an ingredient, there should be an "X" in the cell, otherwise, the cell should remain empty. Example:getwd()
+Create a matrix that shows all cocktail names as rows and all ingredients as columns. When a cocktail requires an ingredient, there should be an "X" in the cell, otherwise, the cell should remain empty. <Example:getwd>()
 
 ```{r}
 
