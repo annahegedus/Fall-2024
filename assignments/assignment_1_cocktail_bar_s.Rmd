@@ -236,6 +236,9 @@ for (i in 1:length(all_cocktails)){
 
 # Print the matrix
 print(data_matrix)
+
+
+#Finished
 ```
 
 Congrats, the bar is now officially open!

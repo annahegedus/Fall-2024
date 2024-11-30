@@ -549,4 +549,8 @@ cat('F-statistic for Complex Model:', f_stat_complex, '\n')
 cat('p-value for Complex Model:', p_value_complex, '\n\n')
 
 print('F-statistics show us whether one predictor of the model is significantly related to the outcome variable. In both cases we see that there is relation between the variables, the more complex model does better in this case as well, the higher the better value is. The p value indicates whether the model has predictive power or not, the lower the better. In both cases we can conclude that the models are truly predictive on the other hand every evidence srongly support the idea of utilizing the more complex model in further usage')
+
+
+
+# Finished
 ```

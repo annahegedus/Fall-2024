@@ -185,7 +185,6 @@ ggplot(merged, aes(x = walk_log, y = bike_log, color = state_region)) +
 
 
 
-#done
-
+#Finished
 
 ```
