@@ -34,6 +34,7 @@ The 2020-09-22 TidyTueday datasets are about climbing expeditions. From the thre
 ```{r}
 library(forcats)
 library(ggplot2)
+library(dplyr)
 
 #tuesdata <- tidytuesdayR::tt_load('2020-09-22') #API limit reached...
 
