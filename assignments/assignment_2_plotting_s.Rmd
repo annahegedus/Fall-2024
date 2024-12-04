@@ -36,7 +36,7 @@ library(forcats)
 library(ggplot2)
 library(dplyr)
 
-#tuesdata <- tidytuesdayR::tt_load('2020-09-22') #API limit reached...
+tuesdata <- tidytuesdayR::tt_load('2020-09-22') #API limit reached...
 
 data <- tuesdata$expeditions
 
@@ -89,8 +89,8 @@ library(ggplot2)
 library(scales) 
 library(RColorBrewer) 
 
-#tuesdata2 <- tidytuesdayR::tt_load('2019-02-19') #API limit reached...
-data2 <- read_csv("C:/Users/Hegedüs Anna/Documents/Fall-2024/data/phd_by_field.csv")
+tuesdata2 <- tidytuesdayR::tt_load('2019-02-19') #API limit reached...
+data2 <- read.csv("C:/Users/Hegedüs Anna/Documents/Fall-2024/data/phd_by_field.csv")
 
 phd_groupping <- data2 %>%
   group_by(broad_field, year) %>%    #group by broad field and year
